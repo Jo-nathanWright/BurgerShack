@@ -8,6 +8,7 @@ export class SidesController extends BaseController {
       .get('', this.getAll)
       .get('/:id', this.getById)
       .post('', this.create)
+      .put('/:id', this.edit)
       .delete('/:id', this.delete)
   }
 
