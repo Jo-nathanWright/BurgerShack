@@ -1,13 +1,13 @@
-import { fakeDb } from '../db/fakeDb'
+import { fakeDbBurgers } from '../db/fakeDbBurgers'
 import { BadRequest } from '../utils/Errors'
 
 class BurgersService {
   getAll() {
-    return fakeDb.burgers
+    return fakeDbBurgers.burgers
   }
 
   getById(id) {
-    const burger = fakeDb.burgers.find(b => b.id.toString() === id)
+    const burger = fakeDbBurgers.burgers.find(b => b.id.toString() === id)
     if (!burger) {
       throw new BadRequest('Invalid Burger ID')
     }
@@ -15,7 +15,7 @@ class BurgersService {
   }
 
   create(body) {
-    fakeDb.burgers.push(body)
+    fakeDbBurgers.burgers.push(body)
     return body
   }
 
@@ -23,16 +23,16 @@ class BurgersService {
     let old = this.getById(body.id)
     old = { ...old, ...body }
     this.delete(old.id)
-    fakeDb.burgers.push(old)
+    fakeDbBurgers.burgers.push(old)
     return old
   }
 
   delete(id) {
-    const index = fakeDb.burgers.findIndex(b => b.id.toString() === id)
+    const index = fakeDbBurgers.burgers.findIndex(b => b.id.toString() === id)
     if (index < -1) {
       throw new BadRequest('Invalid Burger ID')
     }
-    fakeDb.burgers.splice(index, 1)
+    fakeDbBurgers.burgers.splice(index, 1)
   }
 }
 
